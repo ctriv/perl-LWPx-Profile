@@ -50,7 +50,7 @@ In this example, there have been three requests for http://www.google.com/.
 
 =cut
 
-our $original_lwp_ua_request = \&LWP::UserAgent::request;
+our $original_lwp_ua_request;
 our %timings;
 
 sub start_profiling {
@@ -66,6 +66,8 @@ sub stop_profiling {
 }
 
 sub _wrap_request_sub {
+	$original_lwp_ua_request = \&LWP::UserAgent::request;
+	
 	*LWP::UserAgent::request = sub {
 		my ($ua, $req, @args) = @_;
 		

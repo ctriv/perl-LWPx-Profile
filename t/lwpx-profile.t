@@ -7,6 +7,7 @@ use Test::VCR::LWP qw(withVCR);
 use Test::Deep;
 use LWP::UserAgent;
 use LWPx::Profile;
+use File::Spec;
 
 describe "A LWP profiling run" => sub {
 	my $ua;
@@ -78,4 +79,4 @@ describe "A LWP profiling run" => sub {
 
 withVCR {
 	runtests;
-} tape => 't/lwpx-profile.tape';
+} tape => File::Spec->catfile(qw:t lwpx-profile.tape:);
